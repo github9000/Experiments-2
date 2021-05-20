@@ -11,7 +11,8 @@ X = array[:,0:8]
 Y = array[:,8]
 num_folds = 10
 seed = 7
-kfold = KFold(n_splits=num_folds, random_state=seed)
-model = LogisticRegression()
+kfold = KFold(n_splits=num_folds, shuffle=True, random_state=seed)
+model = LogisticRegression(max_iter=1000)
 results = cross_val_score(model, X, Y, cv=kfold)
-print("Accuracy: %.3f%% (%.3f%%)") % (results.mean()*100.0, results.std()*100.0)
+print("Accuracy mean: ", round(results.mean()*100.0, 3), " ", "Stddev: ", round(results.std()*100.0, 3))
+
